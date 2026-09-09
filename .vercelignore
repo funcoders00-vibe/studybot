@@ -1,0 +1,8 @@
+backend/data/
+backend/data/**
+data/
+data/**
+*.pdf
+__pycache__/
+*.pyc
+.env
