@@ -52,7 +52,11 @@ for router in [
 
 @app.on_event("startup")
 def startup():
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Startup database create_all deferred: {e}")
 
 
 @app.get("/")
