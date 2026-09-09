@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { studybotApi } from './services/api'
 
 export default function Login({ onLogin }) {
-  const [email, setEmail] = useState('tamil@example.com')
-  const [password, setPassword] = useState('studybot-local-password')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
