@@ -25,9 +25,13 @@ allowed_origins = [
     "https://studybot-55s2.vercel.app",
 ]
 
+if settings.frontend_url and settings.frontend_url not in allowed_origins:
+    allowed_origins.append(settings.frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -49,6 +53,11 @@ for router in [
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(bind=engine)
+
+
+@app.get("/")
+def root():
+    return {"status": "healthy", "service": settings.app_name, "docs": "/docs"}
 
 
 @app.get("/health")
