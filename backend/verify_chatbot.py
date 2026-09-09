@@ -4,7 +4,7 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-BASE_URL = "http://studybot-55s2.vercel.app/api/v1"
+BASE_URL = "https://studybot-55s2.vercel.app/api/v1"
 
 def run_tests():
     session = requests.Session()
