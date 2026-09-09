@@ -8,7 +8,8 @@ export default function ChatWindow({
   onSendMessage,
   onStartAction,
   onEditAction,
-  loading
+  loading,
+  onToggleSidebar,
 }) {
   const messagesEndRef = useRef(null)
 
@@ -17,12 +18,23 @@ export default function ChatWindow({
   }, [messages, loading])
 
   return (
-    <main className="chat-main">
+    <div className="chat-main">
       <div className="chat-header">
-        <h2>
-          <span>💬</span> {session?.title || 'Study Chat'}
-        </h2>
-        <span>Grounds questions in your notes & syllabus</span>
+        <div className="chat-header-title-wrap">
+          <button
+            type="button"
+            className="mobile-sessions-toggle-btn"
+            onClick={onToggleSidebar}
+            title="Open study sessions"
+            aria-label="Toggle sessions menu"
+          >
+            ☰ Sessions
+          </button>
+          <h2>
+            <span>💬</span> {session?.title || 'Study Chat'}
+          </h2>
+        </div>
+        <span className="chat-header-subtitle">Grounds questions in your notes & syllabus</span>
       </div>
 
       <div className="chat-messages">
@@ -59,6 +71,6 @@ export default function ChatWindow({
       </div>
 
       <ChatInput onSendMessage={onSendMessage} disabled={loading} />
-    </main>
+    </div>
   )
 }

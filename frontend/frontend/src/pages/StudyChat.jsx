@@ -10,6 +10,7 @@ export default function StudyChat({ setPage, setPracticePrefill, setMockTestPref
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
 
   useEffect(() => {
     chatApi.listSessions()
@@ -85,7 +86,7 @@ export default function StudyChat({ setPage, setPracticePrefill, setMockTestPref
         content: responseData.message,
         action: responseData.action,
         parameters: responseData.parameters,
-        mcqs: responseData.mcqs
+        mcqs: responseData.mcqs,
       }
       setMessages((prev) => [...prev, assistantMsg])
 
@@ -114,12 +115,21 @@ export default function StudyChat({ setPage, setPracticePrefill, setMockTestPref
 
   return (
     <div className="chat-layout">
+      {error && (
+        <div className="chat-toast-error" onClick={() => setError('')}>
+          <span>⚠ {error}</span>
+          <button type="button">✕</button>
+        </div>
+      )}
+
       <ChatSidebar
         sessions={sessions}
         activeSessionId={activeSessionId}
         onSelectSession={loadSession}
         onNewChat={handleNewChat}
         onDeleteSession={handleDeleteSession}
+        isOpen={mobileSidebarOpen}
+        onClose={() => setMobileSidebarOpen(false)}
       />
 
       <ChatWindow
@@ -129,6 +139,7 @@ export default function StudyChat({ setPage, setPracticePrefill, setMockTestPref
         onStartAction={handleActionNavigation}
         onEditAction={handleActionNavigation}
         loading={loading}
+        onToggleSidebar={() => setMobileSidebarOpen((prev) => !prev)}
       />
     </div>
   )

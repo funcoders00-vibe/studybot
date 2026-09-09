@@ -44,19 +44,19 @@ export default function Dashboard({ setPage, user }) {
         </div>
       </section>
 
-      <section className="card" style={{ padding: '1.2rem 1.6rem', marginTop: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', background: 'linear-gradient(135deg, #f0f4ff 0%, #e8f5ee 100%)', border: '1px solid #dbe5f7' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ width: '2.8rem', height: '2.8rem', borderRadius: '50%', background: 'linear-gradient(135deg, #43517d, #375344)', color: '#fff', display: 'grid', placeItems: 'center', fontSize: '1.4rem' }}>
+      <section className="card dashboard-ai-banner">
+        <div className="dashboard-ai-content">
+          <div className="dashboard-ai-avatar">
             💬
           </div>
-          <div>
-            <h3 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--ink)' }}>Need help understanding a topic?</h3>
-            <p style={{ margin: '0.2rem 0 0', fontSize: '0.78rem', color: 'var(--muted)' }}>
+          <div className="dashboard-ai-text">
+            <h3>Need help understanding a topic?</h3>
+            <p>
               Chat with AI for simple explanations, syllabus-grounded notes, or instant MCQ practice from any text.
             </p>
           </div>
         </div>
-        <button className="primary" onClick={() => setPage('study_chat')} style={{ whiteSpace: 'nowrap', padding: '0.65rem 1.1rem' }}>
+        <button className="primary dashboard-ai-btn" onClick={() => setPage('study_chat')}>
           Open Study Chat →
         </button>
       </section>
