@@ -43,3 +43,4 @@ def load_syllabus_and_pyq_context(topic_keyword: str = "") -> str:
 
     _CACHED_CONTEXT = "\n\n".join(snippets)[:30000]
     return _CACHED_CONTEXT
+
