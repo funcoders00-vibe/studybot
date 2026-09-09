@@ -24,8 +24,8 @@ export default function Login({ onLogin }) {
   }
 
   function handleDemoFill() {
-    setEmail('tamil@example.com')
-    setPassword('studybot-local-password')
+    setEmail('')
+    setPassword('')
     setError('')
   }
 
