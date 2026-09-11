@@ -1,14 +1,19 @@
 import os
 import sys
 
-# Ensure backend root directory is in sys.path so 'src' and other modules import cleanly on Vercel
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-if parent_dir not in sys.path:
-    sys.path.insert(0, parent_dir)
+# Ensure backend directory and repository root are in sys.path
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+backend_dir = os.path.join(root_dir, "backend")
+
+for path in [backend_dir, root_dir]:
+    if path not in sys.path:
+        sys.path.insert(0, path)
 
 try:
-    from src.main import app
+    try:
+        from backend.src.main import app
+    except ImportError:
+        from src.main import app
 except Exception as e:
     import traceback
     error_trace = traceback.format_exc()
@@ -16,7 +21,7 @@ except Exception as e:
     from fastapi.responses import JSONResponse
     from fastapi.middleware.cors import CORSMiddleware
 
-    app = FastAPI(title="StudyBot Startup Fallback")
+    app = FastAPI(title="StudyBot Root Startup Fallback")
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
@@ -31,10 +36,8 @@ except Exception as e:
             status_code=500,
             content={
                 "success": False,
-                "error": "FastAPI Startup Failure on Vercel",
+                "error": "FastAPI Startup Failure on Vercel Root Entry",
                 "detail": str(e),
                 "traceback": error_trace.splitlines(),
             },
         )
-
-    

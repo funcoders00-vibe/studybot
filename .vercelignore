@@ -1,3 +1,5 @@
+frontend/
+frontend/**
 backend/data/
 backend/data/**
 data/
