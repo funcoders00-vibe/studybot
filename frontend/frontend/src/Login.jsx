@@ -24,8 +24,8 @@ export default function Login({ onLogin }) {
   }
 
   function handleDemoFill() {
-    setEmail('gtamilarasi7294@gmail.com')
-    setPassword('jaya')
+    setEmail('')
+    setPassword('')
     setError('')
   }
 
