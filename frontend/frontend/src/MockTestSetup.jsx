@@ -53,7 +53,7 @@ export default function MockTestSetup({ setPage, setTestId, prefill, clearPrefil
         setTopicMode('PREDEFINED')
         setTopicId(matched.id)
       } else {
-        setTopicMode('MANUAL')
+         setTopicMode('MANUAL')
         setCustomTopic(prefill.topic)
       }
     }
