@@ -1,10 +1,17 @@
 const API_URL = import.meta.env.VITE_API_URL ?? 'https://studybot-55s2.vercel.app/api/v1'
 
 export async function api(path, options = {}) {
+  const token = localStorage.getItem('studybot_token')
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+    ...options.headers,
+  }
+
   const response = await fetch(`${API_URL}${path}`, {
     credentials: 'include',
-    headers: { 'Content-Type': 'application/json', ...options.headers },
     ...options,
+    headers,
   })
   let body
   try {
@@ -19,9 +26,21 @@ export async function api(path, options = {}) {
 }
 
 export const studybotApi = {
-  login: (email, password) => api('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
+  login: async (email, password) => {
+    const data = await api('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) })
+    if (data?.token) {
+      localStorage.setItem('studybot_token', data.token)
+    }
+    return data
+  },
   currentUser: () => api('/auth/me'),
-  logout: () => api('/auth/logout', { method: 'POST' }),
+  logout: async () => {
+    try {
+      await api('/auth/logout', { method: 'POST' })
+    } finally {
+      localStorage.removeItem('studybot_token')
+    }
+  },
   topics: () => api('/topics'),
   progress: () => api('/progress/overview'),
   startPractice: (payload) => api('/practice/start', { method: 'POST', body: JSON.stringify(payload) }),

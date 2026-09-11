@@ -24,8 +24,8 @@ export default function Login({ onLogin }) {
   }
 
   function handleDemoFill() {
-    setEmail('')
-    setPassword('')
+    setEmail('gtamilarasi7294@gmail.com')
+    setPassword('jaya')
     setError('')
   }
 
@@ -64,7 +64,7 @@ export default function Login({ onLogin }) {
                 type="email"
                 required
                 autoComplete="email"
-                placeholder="tamil@example.com"
+                placeholder="gtamilarasi7294@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
