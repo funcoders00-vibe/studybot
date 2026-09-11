@@ -64,7 +64,7 @@ export default function Login({ onLogin }) {
                 type="email"
                 required
                 autoComplete="email"
-                placeholder="gtamilarasi7294@gmail.com"
+                placeholder=""
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
